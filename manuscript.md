@@ -22,10 +22,10 @@ Mathematical formulation
 Euler's equation,
 
 $$
-(x - x_0)\dfrac{\partial f}{\partial x} +
- (y - y_0)\dfrac{\partial f}{\partial y} +
- (z - z_0)\dfrac{\partial f}{\partial z} =
- \eta (b - f).
+(x_i - x_0)\dfrac{\partial f_i}{\partial x} +
+ (y_i - y_0)\dfrac{\partial f_i}{\partial y} +
+ (z_i - z_0)\dfrac{\partial f_i}{\partial z} =
+ \eta (b - f_i).
 $$
 
 Acknowledgments
