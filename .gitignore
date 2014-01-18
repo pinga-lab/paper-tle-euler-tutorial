@@ -30,3 +30,5 @@
 *.vrb
 *.xdy
 *.tdo
+.ipynb_checkpoints/
+manuscript.pdf
