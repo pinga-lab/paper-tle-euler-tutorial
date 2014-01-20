@@ -21,12 +21,22 @@ Mathematical formulation
 
 Euler's equation,
 
-$$
+\begin{equation}
 (x_i - x_0)\dfrac{\partial f_i}{\partial x} +
  (y_i - y_0)\dfrac{\partial f_i}{\partial y} +
  (z_i - z_0)\dfrac{\partial f_i}{\partial z} =
  \eta (b - f_i).
-$$
+\label{euler}
+\end{equation}
+
+Example
+-------
+
+Figure \ref{fig:solutions} was generated from \ref{euler}.
+
+![Sample euler deconvolution. (a) is meh, (b) is bla. \label{fig:solutions}](
+euler-solutions.png)
+
 
 Acknowledgments
 ---------------

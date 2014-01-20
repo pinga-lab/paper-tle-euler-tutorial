@@ -8,7 +8,9 @@ all: pdf
 pdf: $(MANUSCRIPT).pdf
 
 $(MANUSCRIPT).pdf: $(MANUSCRIPT).md $(BIB) header.tex
-	pandoc $(LATEXHEADER) $(PANDOCARGS) $< -o $@
+	pandoc $(LATEXHEADER) $(PANDOCARGS) $< -o $(MANUSCRIPT).tex
+	pdflatex $(MANUSCRIPT).tex
+	pdflatex $(MANUSCRIPT).tex
 
 doc: $(MANUSCRIPT).doc
 
@@ -16,4 +18,5 @@ $(MANUSCRIPT).doc: $(MANUSCRIPT).md $(BIB)
 	pandoc $(PANDOCARGS) $< -o $@
 
 clean:
-	rm -f $(MANUSCRIPT).pdf $(MANUSCRIPT).doc
+	rm -f $(MANUSCRIPT).pdf $(MANUSCRIPT).doc $(MANUSCRIPT).tex *.aux *.bbl \
+	*.log *.out *.blg
