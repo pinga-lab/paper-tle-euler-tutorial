@@ -151,7 +151,7 @@
       <key macro="year-date"/>
       <key macro="author"/>
     </sort>
-    <layout prefix="[" suffix="]" delimiter="; ">
+    <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">
         <text macro="author-short" font-style="italic"/>
         <text macro="year-date"/>
