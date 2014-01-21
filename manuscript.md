@@ -32,11 +32,22 @@ Euler's equation,
 Example
 -------
 
+Figure \ref{fig:data-model} was generated from \ref{euler}.
+
+![Polygonal prism model (a) and synthetic total field anomaly data (b).
+\label{fig:data-model}](
+fig/data-model.png)
+
+
 Figure \ref{fig:solutions} was generated from \ref{euler}.
 
-![Sample euler deconvolution. (a) is meh, (b) is bla. \label{fig:solutions}](
-euler-solutions.png)
+![Euler deconvolution solutions for varying structural index (SI) and moving
+window size. \label{fig:solutions}](
+fig/euler-solutions.png)
 
+![Euler deconvolution solutions for a moving window of 3 km and structural
+index 3. \label{fig:solutions-3d}](
+fig/euler-solutions-3d-composite.png)
 
 Acknowledgments
 ---------------
