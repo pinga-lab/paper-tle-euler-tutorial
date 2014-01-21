@@ -31,5 +31,6 @@
 *.xdy
 *.tdo
 .ipynb_checkpoints/
+tmp/
 manuscript.pdf
 manuscript.tex
