@@ -1,51 +1,36 @@
 Avoiding common pitfalls in Euler deconvolution of potential field data
 =======================================================================
 
-### Leonardo Uieda, Vanderlei C. Oliveira Jr., and Valéria C. F. Barbosa
-
-*Leonardo Uieda ([leouieda@gmail.com](mailto:leouieda@gmail.com)),
-Observatório Nacional, Rio de Janeiro, RJ, Brazil*
-
-*Vanderlei C. Oliveira Jr.,
-Observatório Nacional, Rio de Janeiro, RJ, Brazil*
-
-*Valéria C. F. Barbosa,
-Observatório Nacional, Rio de Janeiro, RJ, Brazil*
-
-----
+Leonardo Uieda, Vanderlei C. Oliveira Jr., and Valéria C. F. Barbosa.
+Observatório Nacional, Rio de Janeiro, RJ, Brazil.
 
 In this tutorial
 we'll talk about
 a widely use method
 of interpretation for potential field data
 called Euler deconvolution.
-The goal is to
+Our goal is to
 demonstrate its usefulness
 and, most importantly,
 call attention to
 common pitfalls encountered
 in the interpretation of the results.
-Since this is a tutorial,
-all of the code and synthetic data
-required to reproduce these results
-are described step-by-step
-in IPython notebooks
-(http://www.ipython.org).
-You can also download the synthetic data used
-and the notebook that generates it
-from (LINK TO FIGSHARE).
-The code that runs the examples bellow
-and produces the figures
-is avaible at (LINK TO FIGSHARE).
+The code and synthetic data
+required to reproduce our results and figures
+can be found in
+the accompanying IPython notebooks
+(**ipython.org/notebook**)
+at **github.com/pinga-lab/paper-tle-euler-tutorial**.
+The notebooks also expand
+the analysis presented here.
 We encourage you to download the data
-and try it
-on your software of choice.
+and try it on your software of choice.
 For this tutorial we'll use
 the implementation in
 the open-source Python package
-Fatiando a Terra (http://www.fatiando.org).
+Fatiando a Terra (**fatiando.org**).
 
-# Brief overview
+### Brief overview
 
 Euler deconvolution
 was first developed by @Thompson1982
@@ -57,15 +42,12 @@ Since then,
 it has been adapted and improved upon
 by @Keating1998,
 @Mushayandebvu2004,
-and
-@Florio2013,
-to name a few.
+and many others.
 This popularity is largely due to its
 the great simplicity of
 implementation and use,
 making it the tool of choice for
-a quick initial interpretation of
-potential field data.
+a quick initial interpretation.
 
 In many cases,
 maps of gravity and magnetic data
@@ -73,40 +55,33 @@ maps of gravity and magnetic data
 provide good constraints on
 the horizontal location of an anomaly source.
 Euler deconvolution is
-a fast and simple technique
-that is able to add
-an extra dimension to
-the interpretation.
+able to add an extra dimension
+to the interpretation.
 It estimates
 a set of (x, y, z) points
-that ideally fall inside
+that, ideally, fall inside
 the source of the anomaly.
-Additionally,
-some extensions to Euler deconvolution
-are able to estimate a parameter
-called the *structural index* (SI)
-of the source.
-This structural index is a number
+The deconvolution requires
+the x-, y-, and z-derivatives of the data
+and a parameter called the *structural index* (SI).
+The SI is a number (usually integer)
 that is related to
-the ideal form of the source.
+the homogeneity of the potential field
+and varies for different fields and source types
+[@Stavrev2007].
 For example,
 in the case of total field magnetic anomaly data,
 a sphere is represented by an SI of 3,
 whereas a dike is represented by an SI of 1.
-Thus,
-the structural index can tell us
-which ideal geometric shape
-more closely resembles the source.
-Structural index estimation
-is a subject of its own
-and will not be covered here.
-We refer the reader to
+There are methods
+that can estimate the SI
+and we refer the reader to
 @Barbosa1999
 and
 @Melo2013
 for more information.
 
-# An example with synthetic data
+### An example with synthetic data
 
 The best way to
 fully grasp the usefulness and limitations
@@ -122,25 +97,23 @@ that differs slightly from ideal sources
 Let's see how
 we can use Fatiando a Terra to
 run the deconvolution on our data.
-The first thing to do
-is load (or `import` in Python)
-the required modules from Fatiando.
-After that,
-we need to calculate
+The first we need
+is to calculate
 the 3 directional derivatives
-of the potential field
-(required for the deconvolution).
+of the potential field.
 For gridded data,
-this can be done easily enough
-with the Fourier transform.
+this can be done
+with the Fourier transform
+using module `fourier`
+from Fatiando.
 Assuming that the data
-has been loaded into Numpy arrays
-`x`, `y`, `z` with the x, y, z coordinates of each data point
-and
-`data` with our magnetic data
+has been loaded into
+Numpy arrays `x`, `y`, `z`
+with the respective x-, y-, z-coordinates of each data point
+and `data` with our magnetic data
 (see the accompanying notebook):
 
-    from fatiando.gravmag import fourier, euler
+    from fatiando.gravmag import fourier
     from fatiando import utils
     # Need data in SI units
     data_si = utils.nt2si(data)
@@ -149,54 +122,108 @@ and
     dy = fourier.derivy(x, y, data_si, shape)
     dz = fourier.derivz(x, y, data_si, shape)
 
+Now that we have the derivatives,
+we have to create a solver to run the deconvolution.
+Fatiando provides the `Classic` solver
+which uses the whole dataset
+to estimate a single point
+(assuming a single source).
+The usual strategy for multiple sources,
+introduced by @Reid1990,
+is to use a *moving window* over the data.
+A point is estimated
+for each window using
+the data that fall inside it,
+producing a large number of solutions.
+The challenge then becomes
+filtering out the good solutions
+from the spurious ones.
+@FitzGerald2004 provide
+an overview of different selection criteria.
+Fatiando provides
+the `MovingWindow` solver
+that can run a given Euler solver
+on a moving window:
 
-# Last few words of caution
+    from fatiando.gravmag.euler import Classic, MovingWindow
+    classic = Classic(x, y, z, data_si, dx, dy, dz, struct_index)
+    solver = MovingWindow(classic, windows=(50, 50), size=(1000, 1000))
+    solver.fit()
 
-Recall that Euler deconvolution
-estimates points that
-ideally fall somewhere inside the source.
-Where, exactly,
-depends on the kind of source.
-For spheres,
-the points fall close to the center of mass.
-For dikes and vertical cylinders (pipes),
-the points fall along the top.
-Keep in mind, though,
-that these are the *ideal* locations
-for simple sources.
-In reality,
-sources are often far from ideal
-and estimated points will
-present a spread from these locations
-by varying amounts.
+Calling `solver.fit()` runs the deconvolution
+using the specified $50 \times 50$ windows of size 1 km.
+The estimated points are stored
+in the `solver.estimate_` variable.
+See the accompanying notebook
+for a more detailed explanation.
 
-We emphasize that
+For comparison,
+we ran the deconvolution
+using various different combinations
+of structural index and window size.
+Figure 2 shows
+scatter plots of the solutions
+(the typical way Euler solutions are presented).
+Notice how changing the window size
+influences the spread of the solutions
+and can affect our interpretation.
+For example,
+for a 1 km window and structural index 3,
+we cannot tell apart
+the two model bodies in the left.
+In general,
+increasing the structural index
+will increase the depths of the solutions.
+
+We can view these solutions in 3D
+using the Fatiando module `myv`,
+a wrapper for the Mayavi visualization software
+(**code.enthought.com/projects/mayavi**):
+
+    from fatiando.vis import myv
+    myv.figure()
+    myv.points(solver.estimate_)
+    myv.axes(myv.outline(model_bounds))
+    myv.show()
+
+This will create
+something similar to Figure 3.
+It is curious how the sources
+make arch-like structures
+that have no relation to
+the actual forms of the sources.
+
+### Last few words of caution
+
+We repeat here for emphasis:
 Euler deconvolution solutions
 **do not** represent
 the three-dimensional outline
 of the sources.
-This is a common mistake among novices
-and is made worse by
-an overconfidence in the results.
+They indicate, at most,
+an approximate location.
 It is crucial to remember that
 Euler solutions are subject to
 non-uniqueness and bias
 just like any other geophysical inverse problem.
+Tests using synthetic data
+are indispensable to assert
+the plausibility of our interpretations.
 
-
-![Polygonal prism model (a) and synthetic total field anomaly data (b).
-\label{fig:data-model}](
+![Our model (a) and synthetic total field anomaly data (b).
+The model simulates a dike (blue), a sill (green), and an intrusive body (red).
+The data is corrupted with 5 nT pseudo-random Gaussian noise.](
 fig/data-model-low.png)
 
 ![Euler deconvolution solutions for varying structural index (SI) and moving
-window size. \label{fig:solutions}](
+window size.](
 fig/euler-solutions-low.png)
 
-![Euler deconvolution solutions for a moving window of 3 km and structural
-index 3. \label{fig:solutions-3d}](
+![3D view of the Euler deconvolution solutions (black dots)
+for a moving window of 3 km and structural index 3.](
 fig/euler-solutions-3d-composite-low.png)
 
-
+*Corresponding author: leouieda@gmail.com*
 
 References
 ----------
