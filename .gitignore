@@ -33,6 +33,4 @@
 *.fff
 .ipynb_checkpoints/
 tmp/
-manuscript.pdf
-manuscript.doc
 manuscript.tex
