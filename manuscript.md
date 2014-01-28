@@ -130,19 +130,17 @@ that differs slightly from ideal sources.
 
 
 
-
-
 ![Polygonal prism model (a) and synthetic total field anomaly data (b).
 \label{fig:data-model}](
-fig/data-model.png)
+fig/data-model-low.png)
 
 ![Euler deconvolution solutions for varying structural index (SI) and moving
 window size. \label{fig:solutions}](
-fig/euler-solutions.png)
+fig/euler-solutions-low.png)
 
 ![Euler deconvolution solutions for a moving window of 3 km and structural
 index 3. \label{fig:solutions-3d}](
-fig/euler-solutions-3d-composite.png)
+fig/euler-solutions-3d-composite-low.png)
 
 
 
