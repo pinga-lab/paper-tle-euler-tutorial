@@ -1,7 +1,7 @@
 MANUSCRIPT=manuscript
 BIB=references.bib
 LATEXHEADER=-H header.tex
-PANDOCARGS=-V fontsize=12pt --bibliography $(BIB) --csl=agu.csl
+PANDOCARGS=-V fontsize=11pt --bibliography $(BIB) --csl=agu.csl
 
 all: pdf
 
@@ -16,6 +16,10 @@ doc: $(MANUSCRIPT).doc
 
 $(MANUSCRIPT).doc: $(MANUSCRIPT).md $(BIB)
 	pandoc $(PANDOCARGS) $< -o $@
+
+wordcount:
+	@echo "Words in:"
+	@wc -w $(MANUSCRIPT).md
 
 clean:
 	rm -f $(MANUSCRIPT).pdf $(MANUSCRIPT).doc $(MANUSCRIPT).tex *.aux *.bbl \
