@@ -17,6 +17,11 @@ doc: $(MANUSCRIPT).doc
 $(MANUSCRIPT).doc: $(MANUSCRIPT).md $(BIB)
 	pandoc $(PANDOCARGS) $< -o $@
 
+odt: $(MANUSCRIPT).odt
+
+$(MANUSCRIPT).odt: $(MANUSCRIPT).md $(BIB)
+	pandoc $(PANDOCARGS) $< -o $@
+
 wordcount:
 	@echo "Words in:"
 	@wc -w $(MANUSCRIPT).md

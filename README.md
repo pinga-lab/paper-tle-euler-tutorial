@@ -1,12 +1,15 @@
-# Avoiding common pitfalls in Euler deconvolution of potential field data
+# Euler deconvolution of potential field data
 
 Leonardo Uieda, Vanderlei C. Oliveira Jr., and Valéria C. F. Barbosa
 
-This is a tutorial submitted to The Leading Edge.
-I'll place a link to the official version once it is published.
+This is a tutorial submitted to
+[The Leading Edge](http://library.seg.org/journal/tle).
 
 Results were generated using the open-source Python package
 [Fatiando a Terra](http://fatiando.org) version 0.2.
+
+The IPython notebooks and data files are also on figshare at
+[dx.doi.org/10.6084/m9.figshare.923450](http://dx.doi.org/10.6084/m9.figshare.923450)
 
 ## Synthetic data and model
 
