@@ -22,4 +22,4 @@ wordcount:
 	@wc -w $(MANUSCRIPT).md
 
 clean:
-	rm -f $(MANUSCRIPT).tex *.aux *.bbl *.log *.out *.blg
+	rm -f $(MANUSCRIPT).tex *.aux *.bbl *.log *.out *.blg *.fff *.lof
