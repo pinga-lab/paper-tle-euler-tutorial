@@ -1,6 +1,8 @@
 # Euler deconvolution of potential field data
 
-Leonardo Uieda, Vanderlei C. Oliveira Jr., and Valéria C. F. Barbosa
+[Leonardo Uieda](http://www.leouieda.com/),
+[Vanderlei C. Oliveira Jr.](http://fatiando.org/people/oliveira-jr/), and
+[Valéria C. F. Barbosa](http://lattes.cnpq.br/0391036221142471)
 
 This is a tutorial submitted to
 [The Leading Edge](http://library.seg.org/journal/tle).
