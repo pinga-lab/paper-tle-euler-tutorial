@@ -11,6 +11,14 @@ Results were generated using the open-source Python package
 The IPython notebooks and data files are also on figshare at
 [dx.doi.org/10.6084/m9.figshare.923450](http://dx.doi.org/10.6084/m9.figshare.923450)
 
+## Reading the tutorial
+
+For now, you can read
+a [pre-print of the tutorial](https://github.com/pinga-lab/paper-tle-euler-tutorial/blob/master/manuscript.pdf?raw=true)
+(`manuscript.pdf`).
+I'll put up a link to the finished version when it comes out
+(probably in the April edition).
+
 ## Synthetic data and model
 
 Examples in the tutorial use
