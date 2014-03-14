@@ -17,7 +17,9 @@ The IPython notebooks and data files are also on figshare at
 
 For now, you can read
 a [pre-print of the tutorial](https://github.com/pinga-lab/paper-tle-euler-tutorial/blob/master/manuscript.pdf?raw=true)
-(`manuscript.pdf`).
+(`manuscript.pdf`)
+or have a quick look at the Markdown source
+[manuscript.md](https://github.com/pinga-lab/paper-tle-euler-tutorial/blob/master/manuscript.md).
 I'll put up a link to the finished version when it comes out
 (probably in the April edition).
 
