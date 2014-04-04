@@ -4,7 +4,9 @@
 [Vanderlei C. Oliveira Jr.](http://fatiando.org/people/oliveira-jr/), and
 [Valéria C. F. Barbosa](http://lattes.cnpq.br/0391036221142471)
 
-This is a tutorial submitted to
+This tutorial was published on the
+[April 2014 issue](http://library.seg.org/toc/leedff/33/4)
+of
 [The Leading Edge](http://library.seg.org/journal/tle).
 
 Results were generated using the open-source Python package
@@ -15,13 +17,27 @@ The IPython notebooks and data files are also on figshare at
 
 ## Reading the tutorial
 
-For now, you can read
+You can view the final edited version at http://dx.doi.org/10.1190/tle33040448.1
+
+The tutorial is also openly available at
+[the SEG
+wiki](http://wiki.seg.org/wiki/Euler_deconvolution_of_potential_field_data_%28tutorial%29).
+If you're a SEG member, you can help improve the article by adding more
+information or correcting any mistakes that you find.
+If you're not, [submit an
+issue](https://github.com/pinga-lab/paper-tle-euler-tutorial/issues)
+to this repository to start a discussion.
+We can add the relevant information to the wiki after.
+Hurray for openness!
+
+If you don't want to leave this repository,
+you can read
 a [pre-print of the tutorial](https://github.com/pinga-lab/paper-tle-euler-tutorial/blob/master/manuscript.pdf?raw=true)
 (`manuscript.pdf`)
 or have a quick look at the Markdown source
 [manuscript.md](https://github.com/pinga-lab/paper-tle-euler-tutorial/blob/master/manuscript.md).
-I'll put up a link to the finished version when it comes out
-(probably in the April edition).
+See below for instructions on how to convert the Markdown source to PDF.
+
 
 ## Synthetic data and model
 
